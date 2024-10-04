@@ -184,10 +184,10 @@ namespace WindowOverlayApp
 
         private void ForegroundEventProc(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
-            if (hwnd == notepadHandle)
+            if (IsAnyParentMatching(hwnd, notepadHandle))
             {
                 UpdateOverlayWindow();
-            } else if (!IsAnyParentMatching(hwnd,notepadHandle) && !IsWindowClass(hwnd, "ForegroundStaging") && !IsWindowClass(hwnd, "MultitaskingViewFrame"))
+            } else if (!IsWindowClass(hwnd, "ForegroundStaging") && !IsWindowClass(hwnd, "MultitaskingViewFrame"))
             {
                 SetWindowPos(this.Handle, 1, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE);
 
